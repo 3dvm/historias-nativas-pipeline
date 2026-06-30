@@ -22,7 +22,6 @@ Manually opening hundreds of `.blend` files to separate these passes—adjusting
 To solve this, I developed a hybrid Python/Bash pipeline to automate the render wrangling process across local machines.
 
 ```mermaid
-flowchart TD```mermaid
     A[📁 Master Scene .blend] --> B{⚙️ render_missing_passes.sh}
     
     subgraph Orchestration [Bash Render Orchestration]
