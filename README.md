@@ -19,7 +19,37 @@ Manually opening hundreds of `.blend` files to separate these passes—adjusting
 
 ## ⚙️ 3. The Pipeline Architecture
 
-To solve the production bottlenecks, I developed a hybrid Python/Bash pipeline divided into two main systems: Asset Centralization and Render Orchestration.
+To solve this, I developed a hybrid Python/Bash pipeline to automate the render wrangling process across local machines.
+
+```mermaid
+flowchart TD```mermaid
+    A[📁 Master Scene .blend] --> B{⚙️ render_missing_passes.sh}
+    
+    subgraph Orchestration [Bash Render Orchestration]
+        B <-->|Reads & Updates Status| C[(📄 omitir.list log)]
+        B -->|If Env pass missing| D[Blender Engine + setup_environment_pass.py]
+        B -->|If Char pass missing| E[Blender Engine + setup_character_pass.py]
+    end
+    
+    subgraph Mutation [Python API Mutation - Headless]
+        D -.->|Overrides| F[Anti-Aliasing: ON<br>Motion Blur: OFF<br>Z-Mask: OFF]
+        E -.->|Overrides| G[Anti-Aliasing: OFF<br>Motion Blur: ON<br>Z-Mask: ON]
+    end
+    
+    F --> H[🖼️ Environment Sequence]
+    G --> I[🖼️ Character Sequence]
+    
+    H --> J((🎬 Final Compositing))
+    I --> J
+
+    classDef bash fill:#4EAA25,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef python fill:#3776AB,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef file fill:#E26F25,stroke:#fff,stroke-width:2px,color:#fff;
+    
+    class B bash;
+    class D,E python;
+    class A file;
+```
 
 ### A. Storage Optimization: The Centralized "libs/" Migration (Python)
 Initially, the project suffered from massive data duplication, as environment and character libraries were copied locally into every episode's folder. As the show grew, this became a storage and version-control nightmare. 
