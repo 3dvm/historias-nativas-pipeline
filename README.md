@@ -1,3 +1,22 @@
+# Historias Nativas: Art-Driven Render Pipeline (Legacy)
+
+![Blender](https://img.shields.io/badge/Blender-2.75-orange?logo=blender&logoColor=white)
+![Python](https://img.shields.io/badge/Python-bpy-blue?logo=python&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-Scripting-4EAA25?logo=gnu-bash&logoColor=white)
+![Role](https://img.shields.io/badge/Role-Pipeline_TD-purple)
+
+> **Note:** These scripts were developed for Blender 2.49 - 2.75 during the production of the animated series *"Historias Nativas"*. While the Blender Python API (`bpy`) has evolved significantly since then, this repository serves as a showcase of fundamental pipeline logic, headless scene mutation, and batch render orchestration that remains highly relevant in modern VFX and animation pipelines.
+
+## 🎨 1. The Artistic Challenge: "Painting with Polygons"
+The art direction for *"Historias Nativas"* required a visual style that emulated traditional brushstrokes in motion. To achieve this, we implemented a technique called **"Painting with Polygons"**, which relies on displacing character geometry using a rotating Empty object, combined with extremely high sub-frame **Motion Blur**.
+
+While this effect looked beautiful and organic on characters, applying it globally to the environments created an uncontrollable visual mess. We needed to split every scene into two distinct render passes:
+* **Character Pass:** High Motion Blur, Anti-Aliasing disabled, Z-Mask enabled.
+* **Environment Pass:** No Motion Blur, High Anti-Aliasing, Z-Mask disabled.
+
+## ⚠️ 2. The Technical Bottleneck
+Manually opening hundreds of `.blend` files to separate these passes—adjusting Render Layers, turning Compositor nodes on and off, and tweaking engine settings—was highly error-prone and would have brought production to a halt. We needed an automated, headless solution.
+
 ## ⚙️ 3. The Pipeline Architecture
 
 To solve the production bottlenecks, I developed a hybrid Python/Bash pipeline divided into two main systems: Asset Centralization and Render Orchestration.
@@ -35,3 +54,13 @@ The scripts in `03_batch_rendering/` act as a lightweight render manager. The co
 * It parses a log file (`omit.list`) to track the status of every frame.
 * It dynamically detects if a scene is missing only the background (`f`) or the character pass (`p`).
 * It injects the missing frame ranges (`-s` and `-e`) into the Blender command line, ensuring the render queue is idempotent and can be safely interrupted overnight.
+
+---
+
+**Ernesto Del Valle Macuare** | Pipeline TD & Tools Developer
+
+[🔗 LinkedIn](https://www.linkedin.com/in/ernesto-del-valle-macuare/) | [🔗 GitHub Portfolio](https://github.com/3dvm)
+
+
+
+
