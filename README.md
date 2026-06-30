@@ -5,7 +5,7 @@
 ![Bash](https://img.shields.io/badge/Bash-Scripting-4EAA25?logo=gnu-bash&logoColor=white)
 ![Role](https://img.shields.io/badge/Role-Pipeline_TD-purple)
 
-> **Note:** These scripts were developed for Blender 2.49 - 2.75 during the production of the animated series *"Historias Nativas"*. While the Blender Python API (`bpy`) has evolved significantly since then, this repository serves as a showcase of fundamental pipeline logic, headless scene mutation, and batch render orchestration that remains highly relevant in modern VFX and animation pipelines.
+> **Note:** These scripts were developed for Blender 2.49 - 2.75 during the production of the animated series *["Historias Nativas"](https://www.youtube.com/playlist?list=PLU0PtXQyV9C7PtgiSqsm3QVCUYM68ybqy)*. While the Blender Python API (`bpy`) has evolved significantly since then, this repository serves as a showcase of fundamental pipeline logic, headless scene mutation, and batch render orchestration that remains highly relevant in modern VFX and animation pipelines.
 
 ## 🎨 1. The Artistic Challenge: "Painting with Polygons"
 The art direction for *"Historias Nativas"* required a visual style that emulated traditional brushstrokes in motion. To achieve this, we implemented a technique called **"Painting with Polygons"**, which relies on displacing character geometry using a rotating Empty object, combined with extremely high sub-frame **Motion Blur**.
