@@ -1,0 +1,18 @@
+# ==============================================================================
+# OMISSION LIST EXAMPLE / RESUME LOG
+# ==============================================================================
+#
+# CASE 1: Scenes rendered at 100% (Completely skipped)
+06_01
+06_02
+
+# CASE 2: Background pass crash. Resumes background render (f) from frame 150 to 300.
+# (The character pass is ignored because it was already completed)
+06_03 f 150 300
+
+# CASE 3: Character pass crash. Resumes character render (p) from frame 50 to 120.
+# (We use dashes '-' as placeholders so the 'p' falls exactly in column 5)
+06_04 - - - p 50 120
+
+# CASE 4: Missing frames for both the background and character passes.
+06_05 f 100 200 p 100 200
